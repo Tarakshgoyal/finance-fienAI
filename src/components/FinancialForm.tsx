@@ -189,7 +189,7 @@ const FinancialForm: React.FC<FinancialFormProps> = ({ onSubmit, onBack }) => {
               <SelectTrigger className={commonInputClass}>
                 <SelectValue placeholder="Select insurance coverage" />
               </SelectTrigger>
-              <SelectContent className="bg-[#1a1a1a] border-[#ddf1a5]/30">
+              <SelectContent className="bg-[#1a1a1a] text-[#ddf1a5] border-[#ddf1a5]/30">
                 <SelectItem value="None">None</SelectItem>
                 <SelectItem value="Health">Health Only</SelectItem>
                 <SelectItem value="Life">Life Only</SelectItem>
@@ -207,7 +207,7 @@ const FinancialForm: React.FC<FinancialFormProps> = ({ onSubmit, onBack }) => {
               <SelectTrigger className={commonInputClass}>
                 <SelectValue placeholder="How often do you track expenses?" />
               </SelectTrigger>
-              <SelectContent className="bg-[#1a1a1a] border-[#ddf1a5]/30">
+              <SelectContent className="bg-[#1a1a1a] text-[#ddf1a5] border-[#ddf1a5]/30">
                 <SelectItem value="Never">Never</SelectItem>
                 <SelectItem value="Occasionally">Occasionally</SelectItem>
                 <SelectItem value="Monthly">Monthly</SelectItem>
@@ -291,7 +291,7 @@ const FinancialForm: React.FC<FinancialFormProps> = ({ onSubmit, onBack }) => {
           <Button
             onClick={onBack}
             variant="outline"
-            className="border-[#ddf1a5] text-[#ddf1a5] hover:bg-[#ddf1a5] hover:text-[#0f0f0f]"
+            className="bg-[#ddf1a5] text-[#0f0f0f]"
           >
             <ArrowLeft className="mr-2" size={20} />
             Back
@@ -352,7 +352,7 @@ const FinancialForm: React.FC<FinancialFormProps> = ({ onSubmit, onBack }) => {
                 onClick={handlePrevious}
                 disabled={currentStep === 0}
                 variant="outline"
-                className="border-[#ddf1a5]/50 text-[#ddf1a5]/50 hover:bg-[#ddf1a5]/10 disabled:opacity-30"
+                className="bg-[#ddf1a5] text-[#0f0f0f] disabled:opacity-30"
               >
                 <ArrowLeft className="mr-2" size={20} />
                 Previous

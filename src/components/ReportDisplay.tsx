@@ -112,7 +112,7 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ data, onBack }) => {
           <Button
             onClick={onBack}
             variant="outline"
-            className="border-[#ddf1a5] text-[#ddf1a5] hover:bg-[#ddf1a5] hover:text-[#0f0f0f]"
+            className=" bg-[#ddf1a5] text-[#0f0f0f]"
           >
             <ArrowLeft className="mr-2" size={20} />
             Back to Dashboard
@@ -157,15 +157,15 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ data, onBack }) => {
                   transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
                   className="text-6xl font-bold mb-2"
                 >
-                  <span className={`bg-gradient-to-r ${riskProfile.color} opacity-60 bg-clip-text `}>
+                  <span className={`bg-gradient-to-r text-white ${riskProfile.color} opacity-60 bg-clip-text `}>
                     {riskScore.toFixed(1)}
                   </span>
-                  <span className="text-2xl opacity-60">/100</span>
+                  <span className="text-2xl text-white opacity-60">/100</span>
                 </motion.div>
                 <div className={`text-xl font-semibold bg-gradient-to-r ${riskProfile.color} bg-clip-text text-transparent`}>
                   {riskProfile.profile}
                 </div>
-                <div className="text-lg opacity-80">{riskProfile.capacity} Risk Capacity</div>
+                <div className="text-lg text-white opacity-80">{riskProfile.capacity} Risk Capacity</div>
               </div>
               <Progress value={riskScore} className="h-3" />
             </CardContent>
@@ -192,7 +192,7 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ data, onBack }) => {
                     <item.icon size={24} className="text-[#ddf1a5]" />
                   </div>
                   <div className="text-2xl font-bold text-[#ddf1a5]">{item.value}</div>
-                  <div className="text-sm opacity-70">{item.title}</div>
+                  <div className="text-sm text-white opacity-70">{item.title}</div>
                 </CardContent>
               </Card>
             </motion.div>
@@ -224,7 +224,7 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ data, onBack }) => {
                 ].map((ratio, index) => (
                   <div key={index} className="p-4 bg-[#2a2a2a] rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm opacity-70">{ratio.label}</span>
+                      <span className="text-sm text-white opacity-70">{ratio.label}</span>
                       <span className={`text-sm ${ratio.healthy ? 'text-green-400' : 'text-orange-400'}`}>
                         {ratio.healthy ? '✓' : '⚠'}
                       </span>

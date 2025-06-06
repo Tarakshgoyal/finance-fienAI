@@ -243,7 +243,7 @@ const Index = () => {
             <Button
               onClick={() => setShowForm(true)}
               variant="outline"
-              className="border-[#ddf1a5] text-[#ddf1a5] hover:bg-[#ddf1a5] hover:text-[#0f0f0f] text-lg px-8 py-4 rounded-xl transition-all duration-300"
+              className="bg-[#ddf1a5] text-[#0f0f0f] text-lg px-8 py-4 rounded-xl transition-all duration-300"
             >
               Get Started Now
             </Button>
