@@ -1,39 +1,53 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
 import { Calculator, TrendingUp, Shield, Target, ArrowRight, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import FinancialForm from '@/components/FinancialForm';
 import ReportDisplay from '@/components/ReportDisplay';
 
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
   const [reportData, setReportData] = useState<FinancialFormData | null>(null);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const { register, handleSubmit, formState: { errors } } = useForm<{ email: string }>();
+
   interface FinancialFormData {
-  age: number;
-  salary: number;
-  city_index: number;
-  assets: number;
-  liabilities: number;
-  loans: number;
-  emi: number;
-  responsibilities: number;
-  savings: number;
-  credit_score: number;
-  investments: number;
-  monthly_expenses: number;
-  risk_tolerance: number;
-  budget: boolean;
-  insurance: string;
-  expense_tracking: string;
-  retirement: boolean;
-  high_risk_percent: number;
-  automate: boolean;
-  defaulted: boolean;
-  advisor: boolean;
-  confidence: number;
-  review_goals: boolean;
-}
+    age: number;
+    salary: number;
+    city_index: number;
+    assets: number;
+    liabilities: number;
+    loans: number;
+    emi: number;
+    responsibilities: number;
+    savings: number;
+    credit_score: number;
+    investments: number;
+    monthly_expenses: number;
+    risk_tolerance: number;
+    budget: boolean;
+    insurance: string;
+    expense_tracking: string;
+    retirement: boolean;
+    high_risk_percent: number;
+    automate: boolean;
+    defaulted: boolean;
+    advisor: boolean;
+    confidence: number;
+    review_goals: boolean;
+  }
+
+  const handleEmailSubmit = (data: { email: string }) => {
+    setEmail(data.email);
+    setShowEmailModal(false);
+    setShowForm(true);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -76,10 +90,11 @@ const Index = () => {
   if (showForm) {
     return <FinancialForm onSubmit={setReportData} onBack={() => setShowForm(false)} />;
   }
+  console.log(email)
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0f0f0f', color: '#ddf1a5' }}>
-      {/* Navigation Header */}
+      {/* Navigation */}
       <motion.nav 
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -97,7 +112,7 @@ const Index = () => {
         </div>
       </motion.nav>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -115,13 +130,11 @@ const Index = () => {
                 <BarChart3 size={48} className="text-[#0f0f0f]" />
               </div>
             </motion.div>
-            
+
             <h1 className="text-6xl text-[#ddf16a5] md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#ddf1a5] via-[#c9e82] to-[#b8d977] bg-clip-text">
               Financial Health
             </h1>
-            <h2 className="text-5xl md:text-6xl font-bold mb-8">
-              Analyzer
-            </h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-8">Analyzer</h2>
           </motion.div>
 
           <motion.p 
@@ -134,8 +147,8 @@ const Index = () => {
 
           <motion.div variants={itemVariants}>
             <Button
-              onClick={() => setShowForm(true)}
-              className="bg-gradient-to-r from-[#ddf1a5] to-[#b8d977] hover:from-[#c9e682] hover:to-[#a6c96a] text-[#0f0f0f] text-xl px-12 py-6 rounded-2xl font-bold shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(221,241,165,0.3)]"
+              onClick={() => setShowEmailModal(true)}
+              className="bg-gradient-to-r from-[#ddf1a5] to-[#b8d977] hover:from-[#c9e682]  hover:to-[#a6c96a] text-[#0f0f0f] text-xl px-12 py-6 rounded-2xl font-bold shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(221,241,165,0.3)]"
             >
               Start Analysis
               <ArrowRight className="ml-3" size={24} />
@@ -143,32 +156,16 @@ const Index = () => {
           </motion.div>
         </div>
 
-        {/* Features Grid */}
+        {/* Features */}
         <motion.div 
           variants={containerVariants}
           className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
         >
           {[
-            {
-              icon: Calculator,
-              title: "Risk Assessment",
-              description: "Advanced scoring algorithm with 9 key factors"
-            },
-            {
-              icon: TrendingUp,
-              title: "Investment Guidance",
-              description: "Personalized portfolio allocation recommendations"
-            },
-            {
-              icon: Shield,
-              title: "Financial Security",
-              description: "Emergency fund and insurance analysis"
-            },
-            {
-              icon: Target,
-              title: "Action Plan",
-              description: "30-day roadmap for financial improvement"
-            }
+            { icon: Calculator, title: "Risk Assessment", description: "Advanced scoring algorithm with 9 key factors" },
+            { icon: TrendingUp, title: "Investment Guidance", description: "Personalized portfolio allocation recommendations" },
+            { icon: Shield, title: "Financial Security", description: "Emergency fund and insurance analysis" },
+            { icon: Target, title: "Action Plan", description: "30-day roadmap for financial improvement" }
           ].map((feature, index) => (
             <motion.div
               key={index}
@@ -189,18 +186,15 @@ const Index = () => {
           ))}
         </motion.div>
 
-        {/* Stats Section */}
+        {/* Stats */}
         <motion.div 
           variants={containerVariants}
           className="bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a] rounded-3xl p-12 border border-[#ddf1a5]/20"
         >
-          <motion.h3 
-            variants={itemVariants}
-            className="text-3xl font-bold text-center mb-12"
-          >
+          <motion.h3 variants={itemVariants} className="text-3xl font-bold text-center mb-12">
             Comprehensive Analysis Features
           </motion.h3>
-          
+
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
               { number: "9+", label: "Risk Factors Analyzed" },
@@ -223,25 +217,11 @@ const Index = () => {
         </motion.div>
 
         {/* Call to Action */}
-        <motion.div 
-          variants={itemVariants}
-          className="text-center mt-16"
-        >
-          <motion.p 
-            className="text-xl mb-8 opacity-90"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 0.8 }}
-          >
-            Take control of your financial future today
-          </motion.p>
-          
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
+        <motion.div variants={itemVariants} className="text-center mt-16">
+          <motion.p className="text-xl mb-8 opacity-90">Take control of your financial future today</motion.p>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button
-              onClick={() => setShowForm(true)}
+              onClick={() => setShowEmailModal(true)}
               variant="outline"
               className="bg-[#ddf1a5] text-[#0f0f0f] text-lg px-8 py-4 rounded-xl transition-all duration-300"
             >
@@ -251,7 +231,35 @@ const Index = () => {
         </motion.div>
       </motion.div>
 
-      {/* Animated Background Elements */}
+      {/* Email Modal */}
+      <Dialog open={showEmailModal} onOpenChange={setShowEmailModal}>
+        <DialogContent className="bg-[#1a1a1a] border-[#ddf1a5]/20 text-[#ddf1a5]">
+          <form onSubmit={handleSubmit(handleEmailSubmit)} className="flex flex-col gap-4">
+            <h2 className="text-2xl font-bold text-center">Enter you Email</h2>
+            <p className="text-center text-sm opacity-70 mb-2">
+              Lets analyse your financial health.
+            </p>
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address'
+                }
+              })}
+              className="bg-[#0f0f0f] border border-[#ddf1a5]/30 text-[#ddf1a5] placeholder:text-[#ddf1a5]/50"
+            />
+            {errors.email && <p className="text-red-400 text-sm">{errors.email.message}</p>}
+            <Button type="submit" className="bg-[#ddf1a5] text-[#0f0f0f] hover:text-[#ddf1a5] font-bold py-2 px-4 rounded-xl">
+              Continue
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Floating Backgrounds */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {[...Array(5)].map((_, i) => (
           <motion.div
